@@ -13,15 +13,17 @@ const Shop = () => {
   return (
     <>
       <Hero />
+
       <Women />
       <NewCollections_women />
+
       <Men />
       <NewCollections_men />
+
       <Kid />
       <NewCollections_kid />
 
       <Offers />
-
       <NewsLetter />
     </>
   );

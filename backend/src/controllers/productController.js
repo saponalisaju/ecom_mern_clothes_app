@@ -220,34 +220,34 @@ exports.new_collection_kid = async (req, res) => {
 
 //if one weekago upload product is shown as below
 
-exports.new_collection_kid = async (req, res) => {
-  try {
-    const oneWeekAgo = new Date();
-    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+// exports.new_collection_kid = async (req, res) => {
+//   try {
+//     const oneWeekAgo = new Date();
+//     oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
 
-    const newCollections = await Product.find({
-      category: "kid",
-      createdAt: { $gte: oneWeekAgo },
-    })
-      .sort({ createdAt: -1 }) // newest first
-      .limit(8);
+//     const newCollections = await Product.find({
+//       category: "kid",
+//       createdAt: { $gte: oneWeekAgo },
+//     })
+//       .sort({ createdAt: -1 }) // newest first
+//       .limit(8);
 
-    if (!newCollections.length) {
-      return res
-        .status(404)
-        .json({ message: "No recent products found in 'kid' category." });
-    }
+//     if (!newCollections.length) {
+//       return res
+//         .status(404)
+//         .json({ message: "No recent products found in 'kid' category." });
+//     }
 
-    console.log("NewCollection Fetched");
-    res.status(200).json(newCollections);
-  } catch (error) {
-    console.error("Error fetching new collection:", error.message);
-    res.status(500).json({
-      message: "An error occurred while fetching the new collection.",
-      error: error.message,
-    });
-  }
-};
+//     console.log("NewCollection Fetched");
+//     res.status(200).json(newCollections);
+//   } catch (error) {
+//     console.error("Error fetching new collection:", error.message);
+//     res.status(500).json({
+//       message: "An error occurred while fetching the new collection.",
+//       error: error.message,
+//     });
+//   }
+// };
 
 //creating endpoint for popular in women section
 exports.popular_women = async (req, res) => {

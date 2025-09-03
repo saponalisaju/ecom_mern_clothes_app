@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./Item.css";
 
-const Item = ({ id, name, image, new_price, old_price }) => {
+const Item = ({ id, name, image, new_price, old_price, onClick }) => {
   return (
-    <div className="item" key={id}>
+    <div className="item" key={id} onClick={onClick}>
       <img src={image} alt={name} className="item-image" />
       <div className="item-details">
         <h3 className="item-name">{name}</h3>
@@ -23,5 +23,6 @@ Item.propTypes = {
   image: PropTypes.string.isRequired,
   new_price: PropTypes.number,
   old_price: PropTypes.number,
+  onClick: PropTypes.func.isRequired,
 };
 export default Item;

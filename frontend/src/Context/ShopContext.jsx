@@ -1,16 +1,18 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useMemo, useState } from "react";
 import api from "../Components/api";
 import PropTypes from "prop-types";
 
 export const ShopContext = createContext(null);
 
-const getDefaultCart = () => {
-  let cart = {};
-  for (let index = 0; index < 301; index++) {
-    cart[index] = 0;
-  }
-  return cart;
-};
+// const getDefaultCart = () => {
+//   let cart = {};
+//   for (let index = 0; index < 301; index++) {
+//     cart[index] = 0;
+//   }
+//   return cart;
+// };
+
+const getDefaultCart = () => ({});
 
 const ShopContextProvider = (props) => {
   const [allProduct, setAllProduct] = useState([]);
@@ -68,10 +70,11 @@ const ShopContextProvider = (props) => {
 
     if (localStorage.getItem("auth-token")) {
       try {
-        const response = await api.post("users/remove_from_cart", {
-          timeout: 5000,
-          data: { itemId },
-        });
+        const response = await api.post(
+          "users/remove_from_cart",
+          { itemId },
+          { timeout: 5000 }
+        );
         if (response.data) {
           setCartItems(response.data);
         }
@@ -104,14 +107,26 @@ const ShopContextProvider = (props) => {
     return totalItem;
   };
 
-  const contextValue = {
-    getTotalCartItems,
-    getTotalCartAmount,
-    allProduct,
-    cartItems,
-    addToCart,
-    removeFromCart,
-  };
+  // const contextValue = {
+  //   getTotalCartItems,
+  //   getTotalCartAmount,
+  //   allProduct,
+  //   cartItems,
+  //   addToCart,
+  //   removeFromCart,
+  // };
+
+  const contextValue = useMemo(
+    () => ({
+      getTotalCartItems,
+      getTotalCartAmount,
+      allProduct,
+      cartItems,
+      addToCart,
+      removeFromCart,
+    }),
+    [allProduct, cartItems]
+  );
 
   ShopContextProvider.propTypes = {
     children: PropTypes.node.isRequired,

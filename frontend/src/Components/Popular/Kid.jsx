@@ -1,9 +1,9 @@
-import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import Item from "../Items/Item";
 import Spinner from "react-bootstrap/esm/Spinner";
+import api from "../api";
 
 const Kid = () => {
   const [popularKid, setPopularKid] = useState([]);
@@ -14,7 +14,7 @@ const Kid = () => {
     setLoading(true);
     setError("");
     try {
-      const response = await axios.get(`product/popular_kid`, {
+      const response = await api.get(`product/popular_kid`, {
         timeout: 5000,
       });
       console.log("Kid", response);

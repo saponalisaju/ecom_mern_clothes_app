@@ -18,11 +18,21 @@ const CartItems = () => {
       </div>
       <hr />
       {allProduct.map((e) => {
+        console.log("e", e);
+        console.log("image", e.image);
         if (cartItems[e.id] > 0) {
           return (
             <div key={e.id}>
               <div className="cartitems-format cartitems-format-main">
-                <img src={e.image} alt="" className="carticon-product-icon" />
+                {e.image ? (
+                  <img
+                    src={e.image}
+                    alt="image"
+                    className="carticon-product-icon"
+                  />
+                ) : (
+                  <p>No image available</p>
+                )}
                 <p>{e.name}</p>
                 <p>${e.new_price}</p>
                 <button className="cartitems-quantity">
