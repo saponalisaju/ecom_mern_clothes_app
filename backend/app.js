@@ -11,6 +11,7 @@ const productRouter = require("./src/routes/productRoutes");
 
 const allowedOrigins = [
   "http://localhost:3000",
+  "http://localhost:4000",
   "http://localhost:5173",
   "https://jobsvisaonline.com",
   "https://jobsvisaonline.netlify.app",

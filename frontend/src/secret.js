@@ -1,3 +1,3 @@
-const clientURL = "https://ecom-mern-clothes-app.onrender.com";
+const clientURL = "http://localhost:4000";
 
 export default clientURL;

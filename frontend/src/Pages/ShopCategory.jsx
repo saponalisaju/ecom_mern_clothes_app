@@ -23,17 +23,19 @@ const ShopCategory = (props) => {
         </select>
       </div>
       <div className="shopcategory-products">
-        {allProduct.map((item, i) => {
+        {allProduct.map((item) => {
+          let i = 0;
+          const { id, name, image, new_price, old_price } = item;
           console.log("hello", allProduct);
           if (props.category === item.category) {
             return (
               <Item
                 key={i}
-                id={item.id}
-                name={item.name}
-                image={item.image}
-                new_price={item.new_price}
-                old_price={item.old_price}
+                id={id}
+                name={name}
+                image={image}
+                new_price={new_price}
+                old_price={old_price}
               />
             );
           } else return null;

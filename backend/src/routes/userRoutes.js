@@ -14,7 +14,7 @@ const {
 const { isLoggedOut, isLoggedIn } = require("../middlewares/auth");
 
 userRouter.post(
-  "/sign_up",
+  "/signup",
   isLoggedOut,
   validationUser,
   runValidation,

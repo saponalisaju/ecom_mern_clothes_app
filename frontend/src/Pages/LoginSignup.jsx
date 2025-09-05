@@ -15,48 +15,66 @@ const LoginSignup = () => {
 
   // add the API for login
   const login = async () => {
-    console.log("login Function Executed", formData);
-    let responseData;
-    await fetch("http://localhost:4000/login", {
-      method: "POST",
-      headers: {
-        Accept: "application/form-data",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((response) => response.json())
-      .then((data) => (responseData = data));
+    try {
+      const response = await fetch(`http://localhost:4000/signup`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-    if (responseData.success) {
-      localStorage.setItem("auth-token", responseData.token);
-      window.location.replace("/");
-    } else {
-      alert(responseData.errors);
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Error", errorText);
+        alert("Something went wrong. Please try again. ");
+        return;
+      }
+      const responseData = await response.json();
+
+      if (responseData.success) {
+        localStorage.setItem("auth-token", responseData.token);
+        window.location.replace("/");
+      } else {
+        alert(responseData.errors || "Login failed");
+      }
+    } catch (error) {
+      console.error("Unexpected error", error);
+      alert("Login failed. Please check credentials or try again later");
     }
   };
 
   // add the API for signup
   const signup = async () => {
-    console.log("Signup Function Executed", formData);
-    // getting the data an input field
-    let responseData;
-    await fetch("http://localhost:4000/signup", {
-      method: "POST",
-      headers: {
-        Accept: "application/form-data",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((response) => response.json())
-      .then((data) => (responseData = data));
+    try {
+      const response = await fetch(`http://localhost:4000/signup`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-    if (responseData.success) {
-      localStorage.setItem("auth-token", responseData.token);
-      window.location.replace("/");
-    } else {
-      alert(responseData.errors);
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Error", errorText);
+        alert("Registration failed. Please try again later.");
+        return;
+      }
+
+      const responseData = await response.json();
+      if (responseData.success) {
+        localStorage.setItem("auth-token", responseData.token);
+        alert("Registration successful");
+        window.location.replace("/");
+      } else {
+        alert(responseData.errors || "Registration failed");
+      }
+    } catch (error) {
+      console.error("Unexpected error", error);
+      alert("Something went wrong. Please try again.");
     }
   };
 

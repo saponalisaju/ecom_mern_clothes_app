@@ -4,15 +4,15 @@ import PropTypes from "prop-types";
 
 export const ShopContext = createContext(null);
 
-// const getDefaultCart = () => {
-//   let cart = {};
-//   for (let index = 0; index < 301; index++) {
-//     cart[index] = 0;
-//   }
-//   return cart;
-// };
+const getDefaultCart = () => {
+  let cart = {};
+  for (let index = 0; index < 301; index++) {
+    cart[index] = 0;
+  }
+  return cart;
+};
 
-const getDefaultCart = () => ({});
+// const getDefaultCart = () => ({});
 
 const ShopContextProvider = (props) => {
   const [allProduct, setAllProduct] = useState([]);
